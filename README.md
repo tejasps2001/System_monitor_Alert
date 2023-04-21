@@ -13,6 +13,6 @@ The user email ID, the periodicity of sending the mail and the thresholds can be
 
 Actions that can be performed by mailing to the script:
 1. "Status": Status of the system. The CPU and RAM usage and 2 lists of CPU-intensive an RAM-intensive programs running.
-2. "Close **\<Program(s) list\>**": Safely closes the programs specified. It replies to this mail about the status of the closure operation.
+2. "Close **\<Program(s) list\>**": Safely closes the programs specified. The programs names must be seperated by commas. It replies to this mail about the status of the closure operation.
 3. "Sleep **\<number of minutes\>"**: Stop the periodic mails to the specified number of minutes. Pinging "Status" stil works.
 4. "Stop sleep": Abort the sleep and starts the mailing again.
