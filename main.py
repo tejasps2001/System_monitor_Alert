@@ -8,39 +8,6 @@ import subprocess
 # Global flag to indicate if download() is finished.
 download_finished = False
 
-def main():
-    task = initialise()
-    if task == '1':
-        PCStatus()
-    # pypi.inputEmail('Enter your E-mail Address.')
-
-
-def initialise():
-    """Create a welcome screen when the script is executed.
-
-    Returns:
-        _str_: accept user's choice to decide what the script should do.
-    """
-    print("Initialising...")
-    print()
-    print("Welcome to System Monitor Alert.".center(66, "-"))
-    print("------------------------------------------------------------------")
-    time.sleep(1)
-    print("A continuously running python script that monitors your system's")
-    print("performance and sends alerts to your email if the system overloads.")
-    print("------------------------------------------------------------------")
-    time.sleep(1)
-    print()
-    print("WHAT DO YOU WANT ME TO DO?".center(66))
-    print()
-    print("1. Show status of your system, or;")
-    print("2. Start monitoring")
-    time.sleep(1)
-    print()
-    task = pypi.inputChoice(["1", "2"])
-    return task
-
-
 def install(moduleName):
     """Call the download() and progressBar to install the third party
        modules.
@@ -92,6 +59,38 @@ def progressBar(text):
         time.sleep(1)
     # Show the cursor again.
     print("\033[?025h", end="")
+
+def main():
+    task = initialise()
+    if task == '1':
+        PCStatus()
+    # pypi.inputEmail('Enter your E-mail Address.')
+
+
+def initialise():
+    """Create a welcome screen when the script is executed.
+
+    Returns:
+        _str_: accept user's choice to decide what the script should do.
+    """
+    print("Initialising...")
+    print()
+    print("Welcome to System Monitor Alert.".center(66, "-"))
+    print("------------------------------------------------------------------")
+    time.sleep(1)
+    print("A continuously running python script that monitors your system's")
+    print("performance and sends alerts to your email if the system overloads.")
+    print("------------------------------------------------------------------")
+    time.sleep(1)
+    print()
+    print("WHAT DO YOU WANT ME TO DO?".center(66))
+    print()
+    print("1. Show status of your system, or;")
+    print("2. Start monitoring")
+    time.sleep(1)
+    print()
+    task = pypi.inputChoice(["1", "2"])
+    return task
 
 
 if __name__ == "__main__":
