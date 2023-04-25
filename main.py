@@ -41,22 +41,6 @@ def initialise():
     return task
 
 
-if __name__ == "__main__":
-    # Automatically download and import third party python modules.
-    while ModuleNotFoundError:
-        try:
-            # Import third-party modules here.
-            import pyinputplus as pypi
-        except ModuleNotFoundError as m:
-            # Use \r because sometimes progressBar() finishes later
-            # than download() and there will be dots in newline.
-            print(f"\r{m.name} not found.")
-            install(m.name)
-        else:
-            print("\rChecking for packages...Present")
-            break
-    main()
-
 def install(moduleName):
     """Call the download() and progressBar to install the third party
        modules.
@@ -109,3 +93,19 @@ def progressBar(text):
     # Show the cursor again.
     print("\033[?025h", end="")
 
+
+if __name__ == "__main__":
+    # Automatically download and import third party python modules.
+    while ModuleNotFoundError:
+        try:
+            # Import third-party modules here.
+            import pyinputplus as pypi
+        except ModuleNotFoundError as m:
+            # Use \r because sometimes progressBar() finishes later
+            # than download() and there will be dots in newline.
+            print(f"\r{m.name} not found.")
+            install(m.name)
+        else:
+            print("\rChecking for packages...Present")
+            break
+    main()
