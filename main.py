@@ -61,10 +61,11 @@ def progressBar(text):
     print("\033[?025h", end="")
 
 def main():
-    task = initialise()
-    if task == '1':
-        PCStatus()
-    # pypi.inputEmail('Enter your E-mail Address.')
+    userinputs = initialise()
+    monitoring(userinputs)
+    print("Starting monitoring...")
+    time.sleep(1)
+    print()
 
 
 def initialise():
@@ -83,14 +84,17 @@ def initialise():
     print("------------------------------------------------------------------")
     time.sleep(1)
     print()
-    print("WHAT DO YOU WANT ME TO DO?".center(66))
+
+    email = pypi.inputEmail('Enter your email address through which the script \ncan communicate.')
+    interval = pypi.inputInt('How often do you want to get informed about your \n \
+                             system usage? Enter the duration in minutes.', min=1.0, max=1440)
+    cpu = pypi.inputInt('Enter the CPU usage threshold above which you want to \
+                         \nreceive messages(inclusive of the threshold).', min=50, max=100)
+    ram = pypi.inputInt('Enter the RAM usage threshold above which you want to \
+                         \nreceive messages(inclusive of the threshold).', min=50, max=100)
     print()
-    print("1. Show status of your system, or;")
-    print("2. Start monitoring")
-    time.sleep(1)
-    print()
-    task = pypi.inputChoice(["1", "2"])
-    return task
+    
+    return email, interval, cpu, ram
 
 
 if __name__ == "__main__":
