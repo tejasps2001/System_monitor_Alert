@@ -1,5 +1,5 @@
 # System_monitor_Alert
-System usage monitor and remote management for Windows and Debian Linux.
+Remote Monitoring and Management for Windows and Debian Linux.
 
 A continuously running python script to monitor your system's performance and send alerts if the system overloads.
 
