@@ -62,17 +62,17 @@ def progressBar(text):
 
 def main():
     userinputs = initialise()
-    monitoring(userinputs)
     print("Starting monitoring...")
     time.sleep(1)
     print()
+    monitoring(userinputs)
 
 
 def initialise():
     """Create a welcome screen when the script is executed.
 
     Returns:
-        _str_: accept user's choice to decide what the script should do.
+        tuple: all user inputs: email ID, interval and thresholds.
     """
     print("Initialising...")
     print()
@@ -85,13 +85,26 @@ def initialise():
     time.sleep(1)
     print()
 
-    email = pypi.inputEmail('Enter your email address through which the script \ncan communicate.')
-    interval = pypi.inputInt('How often do you want to get informed about your \n \
-                             system usage? Enter the duration in minutes.', min=1.0, max=1440)
-    cpu = pypi.inputInt('Enter the CPU usage threshold above which you want to \
-                         \nreceive messages(inclusive of the threshold).', min=50, max=100)
-    ram = pypi.inputInt('Enter the RAM usage threshold above which you want to \
-                         \nreceive messages(inclusive of the threshold).', min=50, max=100)
+    email = pypi.inputEmail('\033[34mEnter your email address through which the script can communicate.\033[37m\n')
+
+    # Dictionary to convert user choice of interval into minutes.
+    intervalConversion = {1: 1, 2: 10, 3: 60, 4: 1440}
+    print('\033[34mHow often do you want to get informed about your system usage?\033[37m\n')
+    print('1. 1 min')
+    print('2. 10 min')
+    print('3. 60 min')
+    print('4. 24 hours')
+    print('5. Custom')
+    interval = pypi.inputInt('\033[34mEnter one option(1-5)\033[37m', min=1, max=5)
+    if not interval == 5:
+        interval = intervalConversion[interval]
+    else:
+        interval = pypi.inputInt('\033[34mEnter the duration in minutes.\033[37m', min=1.0, max=1440)
+
+    cpu = pypi.inputInt('\033[34mEnter the CPU usage threshold above which you want to \
+                         \nreceive messages(inclusive of the threshold).\033[37m', min=50, max=100)
+    ram = pypi.inputInt('\033[34mEnter the RAM usage threshold above which you want to \
+                         \nreceive messages(inclusive of the threshold).\033[37m', min=50, max=100)
     print()
     
     return email, interval, cpu, ram
@@ -111,4 +124,4 @@ if __name__ == "__main__":
         else:
             print("\rChecking for packages...Present")
             break
-    main()
+    initialise()
