@@ -109,12 +109,16 @@ def initialise():
     
     return email, interval, cpu, ram
 
+# def monitoring(parameters):
+    
+
 
 if __name__ == "__main__":
     # Automatically download and import third party python modules.
     while ModuleNotFoundError:
         try:
             # Import third-party modules here.
+            import psutil
             import pyinputplus as pypi
         except ModuleNotFoundError as m:
             # Use \r because sometimes progressBar() finishes later
@@ -124,4 +128,4 @@ if __name__ == "__main__":
         else:
             print("\rChecking for packages...Present")
             break
-    initialise()
+    main()
