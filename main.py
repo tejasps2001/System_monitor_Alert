@@ -61,53 +61,58 @@ def progressBar(text):
     print("\033[?025h", end="")
 
 def main():
-    userinputs = initialise()
+    # Get inputs from the user.
+    user1 = userInputs()
+    time.sleep(1)
+    print()
     print("Starting monitoring...")
-    time.sleep(1)
-    print()
-    monitoring(userinputs)
 
-
-def initialise():
-    """Create a welcome screen when the script is executed.
-
-    Returns:
-        tuple: all user inputs: email ID, interval and thresholds.
+class userInputs:
+    """Represents the set of user inputs for a single managed system.
     """
-    print("Initialising...")
-    print()
-    print("Welcome to System Monitor Alert.".center(66, "-"))
-    print("------------------------------------------------------------------")
-    time.sleep(1)
-    print("A continuously running python script that monitors your system's")
-    print("performance and sends alerts to your email if the system overloads.")
-    print("------------------------------------------------------------------")
-    time.sleep(1)
-    print()
+    def __init__(self):
+        """Create a welcome screen when the script is executed.
 
-    email = pypi.inputEmail('\033[34mEnter your email address through which the script can communicate.\033[37m\n')
+            Returns:
+            tuple: all user inputs: email ID, interval and thresholds.
+        """
+        print("Initialising...")
+        print()
+        print("Welcome to System Monitor Alert.".center(66, "-"))
+        print("------------------------------------------------------------------")
+        time.sleep(1)
+        print("A continuously running python script that monitors your system's")
+        print("performance and sends alerts to your email if the system overloads.")
+        print("------------------------------------------------------------------")
+        time.sleep(1)
+        print()
 
-    # Dictionary to convert user choice of interval into minutes.
-    intervalConversion = {1: 1, 2: 10, 3: 60, 4: 1440}
-    print('\033[34mHow often do you want to get informed about your system usage?\033[37m\n')
-    print('1. 1 min')
-    print('2. 10 min')
-    print('3. 60 min')
-    print('4. 24 hours')
-    print('5. Custom')
-    interval = pypi.inputInt('\033[34mEnter one option(1-5)\033[37m', min=1, max=5)
-    if not interval == 5:
-        interval = intervalConversion[interval]
-    else:
-        interval = pypi.inputInt('\033[34mEnter the duration in minutes.\033[37m', min=1.0, max=1440)
+        email = pypi.inputEmail('\033[34mEnter your email address through which the script can communicate.\033[37m\n')
 
-    cpu = pypi.inputInt('\033[34mEnter the CPU usage threshold above which you want to \
-                         \nreceive messages(inclusive of the threshold).\033[37m', min=50, max=100)
-    ram = pypi.inputInt('\033[34mEnter the RAM usage threshold above which you want to \
-                         \nreceive messages(inclusive of the threshold).\033[37m', min=50, max=100)
-    print()
-    
-    return email, interval, cpu, ram
+        # Dictionary to convert user choice of interval into minutes.
+        intervalConversion = {1: 1, 2: 10, 3: 60, 4: 1440}
+        print('\033[34mHow often do you want to get informed about your system usage?\033[37m\n')
+        print('1. 1 min')
+        print('2. 10 min')
+        print('3. 60 min')
+        print('4. 24 hours')
+        print('5. Custom')
+        interval = pypi.inputInt('\033[34mEnter one option(1-5) \033[37m', min=1, max=5)
+        if not interval == 5:
+            interval = intervalConversion[interval]
+        else:
+            interval = pypi.inputInt('\033[34mEnter the duration in minutes. \033[37m', min=1.0, max=1440)
+
+        cpu = pypi.inputInt('\033[34mEnter the CPU usage threshold(in %) above which you want to \
+                            \nreceive messages(inclusive of the threshold). \033[37m', min=50, max=100)
+        ram = pypi.inputInt('\033[34mEnter the RAM usage threshold(in %) above which you want to \
+                            \nreceive messages(inclusive of the threshold). \033[37m', min=50, max=100)
+        print()
+
+        self.email = email
+        self.interval = interval
+        self.cpu_threshold = cpu
+        self.ram_threshold = ram
 
 # def monitoring(parameters):
     
